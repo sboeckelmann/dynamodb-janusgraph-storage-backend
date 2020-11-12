@@ -629,15 +629,16 @@ public class DynamoDbDelegate  {
     }
 
     private void timedThrottle(final String apiName, final RateLimiter limiter, final String tableName, final int permits) {
-        if (limiter == null) {
-            throw new IllegalArgumentException("limiter for " + apiName + " on table " + tableName + " was null");
-        }
-        final Timer.Context throttleTimerCtxt = getTimerContext(String.format("%sThrottling", apiName), tableName);
-        try {
-            limiter.acquire(permits);
-        } finally {
-            throttleTimerCtxt.stop();
-        }
+        // DISABLE throttling here
+        // if (limiter == null) {
+        //     throw new IllegalArgumentException("limiter for " + apiName + " on table " + tableName + " was null");
+        // }
+        // final Timer.Context throttleTimerCtxt = getTimerContext(String.format("%sThrottling", apiName), tableName);
+        // try {
+        //     limiter.acquire(permits);
+        // } finally {
+        //     throttleTimerCtxt.stop();
+        // }
     }
 
     ListTablesResult listTables(final ListTablesRequest request) throws BackendException {
